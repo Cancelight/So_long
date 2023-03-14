@@ -6,7 +6,7 @@
 /*   By: bkiziler <bkiziler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 18:01:24 by bkiziler          #+#    #+#             */
-/*   Updated: 2023/03/14 20:25:55 by bkiziler         ###   ########.fr       */
+/*   Updated: 2023/03/14 20:58:50 by bkiziler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ typedef struct	s_data {
 	void	*wall_img;
 	void	*floor_img;
 	void	*hero_img;
+	void	*collect_img;
 	char	*addr;
 	int		bits_per_pixel;
 	int		line_length;
