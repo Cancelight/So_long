@@ -6,7 +6,7 @@
 /*   By: bkiziler <bkiziler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 20:46:32 by bkiziler          #+#    #+#             */
-/*   Updated: 2023/03/14 21:08:47 by bkiziler         ###   ########.fr       */
+/*   Updated: 2023/03/14 21:46:44 by bkiziler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,9 @@ void	def_img(t_vars *vars, t_data *img)
 {
 	int x;
 	int y;
+
+	x=64;
+	y=64;
 	img->wall_img = mlx_xpm_file_to_image(vars->mlx, "./xpm_images/soldier.xpm", &x,&y);
 	img->floor_img = mlx_xpm_file_to_image(vars->mlx, "./xpm_images/floor.xpm", &x,&y);
 	img->hero_img = mlx_xpm_file_to_image(vars->mlx, "./xpm_images/sokrates.xpm", &x,&y);
@@ -52,7 +55,7 @@ int	main(void)
 	t_data	img;
 	t_vars	vars;
 
-	//mapin oynanabilir olduğuna dair check;
+	//mapin oynanabilir olduğuna dair check; mapin okunup heronun yeri belirlenmeli (index *64 tarzında)
 	vars.mlx = mlx_init();
 	vars.win = mlx_new_window(vars.mlx, 640, 64*6, "Project");
 	def_img(&vars, &img);

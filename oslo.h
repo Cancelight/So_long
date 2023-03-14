@@ -6,7 +6,7 @@
 /*   By: bkiziler <bkiziler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 18:01:24 by bkiziler          #+#    #+#             */
-/*   Updated: 2023/03/14 20:58:50 by bkiziler         ###   ########.fr       */
+/*   Updated: 2023/03/14 21:44:01 by bkiziler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,9 @@
 # define ESC 53
 
 #include "minilibx/mlx.h"
+#include <stdio.h> // for perror
+#include <stdlib.h> // for exit
+#include <string.h> // for strerrror
 
 typedef struct	s_data {
 	void	*wall_img;
