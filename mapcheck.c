@@ -6,7 +6,7 @@
 /*   By: bkiziler <bkiziler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 18:33:50 by bkiziler          #+#    #+#             */
-/*   Updated: 2023/03/20 21:23:46 by bkiziler         ###   ########.fr       */
+/*   Updated: 2023/03/20 21:33:24 by bkiziler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,10 +116,13 @@ int	col_check(char **map, int y_size)
 	x = 0;
 	y = 0;
 	count = 0;
-	while (++y < y_size )
+	while (++y < y_size - 1)
 	{
 		while (map[y][++x] && count <= 1)
 		{
+			if (map[y][x] != 'C' && map[y][x] == '1' && map[y][x] != '0' && \
+			map[y][x] != 'P' && map[y][x] != 'E') // strtrim döndürüp boş gelmezse invalid diyebilirsin
+			//invalid map
 			if (map[y][x] == 'C')
 			{
 				if (map[y][x-1] == '1' && map[y][x+1] == '1' && \
