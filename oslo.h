@@ -6,7 +6,7 @@
 /*   By: bkiziler <bkiziler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 18:01:24 by bkiziler          #+#    #+#             */
-/*   Updated: 2023/03/14 21:44:01 by bkiziler         ###   ########.fr       */
+/*   Updated: 2023/03/20 18:36:37 by bkiziler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 #include <stdio.h> // for perror
 #include <stdlib.h> // for exit
 #include <string.h> // for strerrror
+#include <fcntl.h>
 
 typedef struct	s_data {
 	void	*wall_img;
