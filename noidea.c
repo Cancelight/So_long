@@ -6,7 +6,7 @@
 /*   By: bkiziler <bkiziler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 20:46:32 by bkiziler          #+#    #+#             */
-/*   Updated: 2023/03/20 18:33:45 by bkiziler         ###   ########.fr       */
+/*   Updated: 2023/03/20 21:22:35 by bkiziler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	main(void)
 	t_data	img;
 	t_vars	vars;
 
-	readmap
+	map_size();
 	vars.mlx = mlx_init();
 	vars.win = mlx_new_window(vars.mlx, 640, 64*6, "Project");
 	def_img(&vars, &img);

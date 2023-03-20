@@ -6,7 +6,7 @@
 /*   By: bkiziler <bkiziler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 18:33:50 by bkiziler          #+#    #+#             */
-/*   Updated: 2023/03/20 21:06:13 by bkiziler         ###   ########.fr       */
+/*   Updated: 2023/03/20 21:23:46 by bkiziler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	map_size(void)
 	read_map(x, y);
 }
 
-void read_map(int x, int y)
+void	read_map(int x, int y)
 {
 	char	**map;
 	int		a;

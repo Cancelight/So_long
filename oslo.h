@@ -6,7 +6,7 @@
 /*   By: bkiziler <bkiziler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 18:01:24 by bkiziler          #+#    #+#             */
-/*   Updated: 2023/03/20 18:36:37 by bkiziler         ###   ########.fr       */
+/*   Updated: 2023/03/20 21:24:07 by bkiziler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,10 @@ int		right_move(t_vars *vars);
 int		direct_moves(int keycode, t_vars *vars);
 void	def_img(t_vars *vars, t_data *img);
 void	background(t_vars *vars, t_data *img);
+void	map_size(void);
+void	read_map(int x, int y);
+void	map_wall(char **map, int y_size);
+void	pe_check(char **map, int y_size, int c);
+int	col_check(char **map, int y_size);
 
 #endif
