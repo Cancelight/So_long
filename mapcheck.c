@@ -6,14 +6,13 @@
 /*   By: bkiziler <bkiziler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 18:33:50 by bkiziler          #+#    #+#             */
-/*   Updated: 2023/03/20 21:33:24 by bkiziler         ###   ########.fr       */
+/*   Updated: 2023/03/21 18:13:43 by bkiziler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "oslo.h"
 
-void	map_size(void)
+int	map_size(t_data *data)
 {
 	int		fd;
 	int		x;
@@ -21,7 +20,7 @@ void	map_size(void)
 	int		y;
 	char	*str;
 
-	fd = open("map.txt", O_RDWR, 0777);
+	fd = open("map.ber", O_RDWR, 0777);
 	str = get_next_line(fd);
 	y = 0;
 	x1 = ft_strlen(str);
@@ -30,60 +29,59 @@ void	map_size(void)
 		y++;
 		x = ft_strlen(str);
 		if(x != x1)
-			//error map valid değil
+			return(-1);
 		str = get_next_line(fd);
 	}
 	free(str);
 	if (x1 == 0 || y == 0)
-		//error map valid değil
-	read_map(x, y);
+		return(-1);
+	return(read_map(x, y, data));
 }
 
-void	read_map(int x, int y)
+int	read_map(int x, int y, t_data *data)
 {
-	char	**map;
 	int		a;
 	int		fd;
 	int		i;
 
 	i = 0;
 	a = 0;
-	map = malloc(sizeof(char *) * y);
+	data ->map = malloc(sizeof(char *) * y);
 	while(a < y)
-		map[a++] = malloc(sizeof(char) * (x + 1));
-	fd = open("map.txt", O_RDWR, 0777);
+		data -> map[a++] = malloc(sizeof(char) * (x + 1));
+	fd = open("map.ber", O_RDWR, 0777);
 	while(i < y)
-		map[i++] = get_next_line(fd);
-	map_wall(map, y - 1); // \n a kadar kontroller için y -1
+		data -> map[i++] = get_next_line(fd);
+	return (map_wall(y, data));
 }
 
-void	map_wall(char **map, int y_size)
+int	map_wall(int y_size, t_data *data)
 {
 	int	x;
 	int	y;
 
 	x = -1;
 	y = -1;
-	while (map[0][++x])
+	while (data -> map[0][++x] && data -> map[0][x] != '\n')
 	{
-		if (map[0][x] != '1' || map[y_size -1][x] != 1)
-			//map valid değil
+		if (data -> map[0][x] != '1' || data -> map[y_size -1][x] != 1)
+			return(-1);
 	}
 	while (++y < y_size)
 	{
-		if (map[y][0] != '1' || map[y][x -1] != '1')
-		//map valid değil
+		if (data -> map[y][0] != '1' || data -> map[y][x - 2] != '1')
+			return(-1);
 	}
-	pe_check(map, y_size, 'E');
-	pe_check(map, y_size, 'P');
-	col_check(map, y_size); // collect sizeı geri döndürüyor.
+	if (chr_check(data, y_size) == -1 || pe_check(y_size, 'P', data) == -1 || \
+	pe_check(y_size, 'E', data) == -1 || pe_check(y_size, 'P', data) == -1)
+		return (-1);
+	return (0);
 }
 
-void	pe_check(char **map, int y_size, int c)
+int	pe_check(int y_size, int c, t_data *data)
 {
 	int	x;
 	int	y;
-	int	i;
 	int	count;
 
 	x = 0;
@@ -91,46 +89,20 @@ void	pe_check(char **map, int y_size, int c)
 	count = 0;
 	while (++y < y_size)
 	{
-		while (map[y][++x] && count <= 1)
+		while (data -> map[y][++x] && count <= 1)
 		{
-			if (map[y][x] == c)
+			if (data -> map[y][x] =='E')
 			{
-				if (map[y][x-1] == '1' && map[y][x+1] == '1' && \
-					map[y-1][x] == '1' && map[y+1][x] =='1')
-					//invalid map
+				if (data -> map[y][x-1] == '1' && data -> map[y][x+1] == '1' && \
+					data -> map[y-1][x] == '1' && data -> map[y+1][x] =='1')
+					return(-1);
 				count++;
 			}
 		}
 	}
-	if (count != 1)
-	//invalid map
-}
-
-int	col_check(char **map, int y_size)
-{
-	int	x;
-	int	y;
-	int	i;
-	int	count;
-
-	x = 0;
-	y = 0;
-	count = 0;
-	while (++y < y_size - 1)
-	{
-		while (map[y][++x] && count <= 1)
-		{
-			if (map[y][x] != 'C' && map[y][x] == '1' && map[y][x] != '0' && \
-			map[y][x] != 'P' && map[y][x] != 'E') // strtrim döndürüp boş gelmezse invalid diyebilirsin
-			//invalid map
-			if (map[y][x] == 'C')
-			{
-				if (map[y][x-1] == '1' && map[y][x+1] == '1' && \
-					map[y-1][x] == '1' && map[y+1][x] =='1')
-					//invalid map
-				count++;
-			}
-		}
-	}
-	return (count);
+	if ((c == 'E' || c == 'P') && count != 1)
+		return(-1);
+	else if (c == 'C')
+		col_loc(count, y_size, data);
+	return(0);
 }
