@@ -6,7 +6,7 @@
 /*   By: bkiziler <bkiziler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 20:46:32 by bkiziler          #+#    #+#             */
-/*   Updated: 2023/03/23 15:15:31 by bkiziler         ###   ########.fr       */
+/*   Updated: 2023/03/23 15:29:11 by bkiziler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int	main(void)
 	if (map_size(data) == -1 )
 	{
 		perror("Invalid map\n");
-		exit;
+		exit(1);
 	}
 	data -> mlx = mlx_init();
 	def_img(data);

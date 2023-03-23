@@ -6,7 +6,7 @@
 /*   By: bkiziler <bkiziler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 14:49:44 by bkiziler          #+#    #+#             */
-/*   Updated: 2023/03/23 15:13:28 by bkiziler         ###   ########.fr       */
+/*   Updated: 2023/03/23 15:34:17 by bkiziler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,4 +59,17 @@ void	step_count(int ret)
 		step++;
 		ft_printf("%d", step);
 	}
+}
+
+void	gen_img(t_data *data)
+{
+	mlx_destroy_window(data -> mlx, data -> win);
+	background(data);
+	up_layer(data);
+}
+
+void	exit_game(t_data *data, int ret)
+{
+	mlx_destroy_window(data -> mlx, data -> win);
+	exit(ret);
 }

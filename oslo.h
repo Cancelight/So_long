@@ -6,7 +6,7 @@
 /*   By: bkiziler <bkiziler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 18:01:24 by bkiziler          #+#    #+#             */
-/*   Updated: 2023/03/23 14:53:58 by bkiziler         ###   ########.fr       */
+/*   Updated: 2023/03/23 15:39:39 by bkiziler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ typedef struct	s_data {
 	int			bits_per_pixel;
 	int			line_length;
 	int			endian;
-	int			*p_loc; // y, x
+	int			*p_loc;
 	void		*mlx;
 	void		*win;
 	char 		**map;
@@ -54,7 +54,7 @@ int		up_move(t_data *data);
 int		down_move(t_data *data);
 int		left_move(t_data *data);
 int		right_move(t_data *data);
-int		direct_moves(int keycode, t_data *data);
+void	direct_moves(int keycode, t_data *data);
 void	def_img(t_data *data);
 void	background(t_data *data);
 int		map_size(t_data *data);
@@ -65,5 +65,6 @@ int		chr_check(t_data *data, int y_size);
 void	ple_loc(int y_size, t_data *data);
 void	up_layer(t_data *data);
 void	gen_img(t_data *data);
+void	exit_game(t_data *data, int ret);
 
 #endif
