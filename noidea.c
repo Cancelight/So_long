@@ -6,7 +6,7 @@
 /*   By: bkiziler <bkiziler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 20:46:32 by bkiziler          #+#    #+#             */
-/*   Updated: 2023/03/23 15:29:11 by bkiziler         ###   ########.fr       */
+/*   Updated: 2023/03/23 16:35:32 by bkiziler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,17 +70,17 @@ void	up_layer(t_data *data)
 
 int	main(void)
 {
-	t_data	*data;
+	t_data	data;
 
-	if (map_size(data) == -1 )
+	if (map_size(&data) == -1 )
 	{
 		perror("Invalid map\n");
 		exit(1);
 	}
-	data -> mlx = mlx_init();
-	def_img(data);
-	background(data);
-	up_layer(data);
-	mlx_key_hook(data -> win, direct_moves, data);
-	mlx_loop(data -> mlx);
+	data.mlx = mlx_init();
+	def_img(&data);
+	background(&data);
+	up_layer(&data);
+	mlx_key_hook(data.win, direct_moves, &data);
+	mlx_loop(data.mlx);
 }

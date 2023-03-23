@@ -6,13 +6,13 @@
 /*   By: bkiziler <bkiziler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 20:46:36 by bkiziler          #+#    #+#             */
-/*   Updated: 2023/03/23 15:33:41 by bkiziler         ###   ########.fr       */
+/*   Updated: 2023/03/23 16:41:29 by bkiziler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "oslo.h"
 
-void direct_moves(int keycode, t_data *data)
+int direct_moves(int keycode, t_data *data)
 {
 	if (keycode == W || keycode == UP)
 		step_count(up_move(data));
@@ -24,6 +24,7 @@ void direct_moves(int keycode, t_data *data)
 		step_count(left_move(data));
 	else if (keycode == ESC)
 		mlx_destroy_window(data -> mlx, data -> win);
+	return (0);
 }
 
 int	up_move(t_data *data)
@@ -50,6 +51,7 @@ int	up_move(t_data *data)
 	}
 	else if (data -> map[y + 1][x] == 'E' && data -> collect == 0)
 		exit_game(data, 0);
+	return (0);
 }
 
 int	down_move(t_data *data)
@@ -76,6 +78,7 @@ int	down_move(t_data *data)
 	}
 	else if (data -> map[y - 1][x] == 'E' && data -> collect == 0)
 		exit_game(data, 0);
+	return (0);
 }
 
 int	right_move(t_data *data)
@@ -102,6 +105,7 @@ int	right_move(t_data *data)
 	}
 	else if (data -> map[y][x + 1] == 'E' && data -> collect == 0)
 		exit_game(data, 0);
+	return (0);
 }
 
 int	left_move(t_data *data)
@@ -128,4 +132,5 @@ int	left_move(t_data *data)
 	}
 	else if (data -> map[y][x - 1] == 'E' && data -> collect == 0)
 		exit_game(data, 0);
+	return (0);
 }

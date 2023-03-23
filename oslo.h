@@ -6,7 +6,7 @@
 /*   By: bkiziler <bkiziler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 18:01:24 by bkiziler          #+#    #+#             */
-/*   Updated: 2023/03/23 15:39:39 by bkiziler         ###   ########.fr       */
+/*   Updated: 2023/03/23 16:50:52 by bkiziler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,8 @@
 #include <stdlib.h> // for exit
 #include <string.h> // for strerrror
 #include <fcntl.h>
-#include "./libft/libft.h"
 #include "./Get_next_line/get_next_line.h"
-#include "./Printf/ft_printf.h"
+#include "./ft_printf/ft_printf.h"
 
 typedef struct	s_data {
 	void		*wall_img;
@@ -54,7 +53,7 @@ int		up_move(t_data *data);
 int		down_move(t_data *data);
 int		left_move(t_data *data);
 int		right_move(t_data *data);
-void	direct_moves(int keycode, t_data *data);
+int		direct_moves(int keycode, t_data *data);
 void	def_img(t_data *data);
 void	background(t_data *data);
 int		map_size(t_data *data);
@@ -66,5 +65,8 @@ void	ple_loc(int y_size, t_data *data);
 void	up_layer(t_data *data);
 void	gen_img(t_data *data);
 void	exit_game(t_data *data, int ret);
+char	*ft_strtrim(char *s1, char *set);
+void	step_count(int ret);
+int	ft_strlcpy(char *dst, char *src, int dstsize);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: bkiziler <bkiziler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 18:33:50 by bkiziler          #+#    #+#             */
-/*   Updated: 2023/03/23 14:44:34 by bkiziler         ###   ########.fr       */
+/*   Updated: 2023/03/23 16:31:56 by bkiziler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int	map_wall(int y_size, t_data *data)
 	if (pe_check(y_size, 'P', data) == -1 || pe_check(y_size, 'E', data) == -1 \
 		|| pe_check(y_size, 'C', data) == -1)
 		return (-1);
-	pl_loc(y_size, data);
+	ple_loc(y_size, data);
 	return (0);
 }
 
