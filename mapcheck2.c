@@ -6,7 +6,7 @@
 /*   By: bkiziler <bkiziler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 14:49:44 by bkiziler          #+#    #+#             */
-/*   Updated: 2023/03/23 16:33:56 by bkiziler         ###   ########.fr       */
+/*   Updated: 2023/03/23 17:35:35 by bkiziler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,11 @@ void	ple_loc(int y_size, t_data *data)
 
 	x = 0;
 	y = 0;
+	data -> p_loc = malloc(sizeof(int) * 2);
 	while (++y < y_size)
 	{
 		x = 0;
-		while (data -> map[y][++x])
+		while (data -> map[y][++x] != '\n')
 		{
 			if (data -> map[y][x] == 'P')
 			{

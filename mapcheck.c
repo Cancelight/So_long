@@ -6,7 +6,7 @@
 /*   By: bkiziler <bkiziler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 18:33:50 by bkiziler          #+#    #+#             */
-/*   Updated: 2023/03/23 16:31:56 by bkiziler         ###   ########.fr       */
+/*   Updated: 2023/03/23 17:38:53 by bkiziler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int	map_size(t_data *data)
 			return (-1);
 		str = get_next_line(fd);
 	}
+	close(fd);
 	free(str);
 	if (x1 == 0 || y == 0)
 		return (-1);
@@ -54,6 +55,7 @@ int	read_map(int x, int y, t_data *data)
 	fd = open("map.ber", O_RDWR, 0777);
 	while (i < y)
 		data -> map[i++] = get_next_line(fd);
+	close(fd);
 	return (map_wall(y, data));
 }
 
@@ -66,14 +68,14 @@ int	map_wall(int y_size, t_data *data)
 	y = -1;
 	if (chr_check (data, y_size) == -1)
 		return (-1);
-	while (data -> map[0][x] != '\n')
+	while (data -> map[0][++x] != '\n')
 	{
-		if (data -> map[0][x] != '1' || data -> map[y_size -1][x] != 1)
+		if (data -> map[0][x] != '1' || data -> map[y_size -1][x] != '1')
 			return(-1);
 	}
 	while (++y < y_size)
 	{
-		if (data -> map[y][0] != '1' || data -> map[y][x - 2] != '1')
+		if (data -> map[y][0] != '1' || data -> map[y][x - 1] != '1')
 			return(-1);
 	}
 	if (pe_check(y_size, 'P', data) == -1 || pe_check(y_size, 'E', data) == -1 \
