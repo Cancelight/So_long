@@ -6,7 +6,7 @@
 /*   By: bkiziler <bkiziler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 18:01:24 by bkiziler          #+#    #+#             */
-/*   Updated: 2023/03/21 18:12:16 by bkiziler         ###   ########.fr       */
+/*   Updated: 2023/03/23 14:53:58 by bkiziler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,32 +41,29 @@ typedef struct	s_data {
 	int			bits_per_pixel;
 	int			line_length;
 	int			endian;
-	t_location	*loc;
+	int			*p_loc; // y, x
 	void		*mlx;
 	void		*win;
 	char 		**map;
+	int			collect;
+	int			y_max;
+	int			x_max;
 }				t_data;
 
-typedef struct s_location{
-	int	*p_loc;
-	int	*c_xloc;
-	int	*c_yloc;
-}				t_location;
-
-int		up_move(t_vars *vars);
-int		down_move(t_vars *vars);
-int		left_move(t_vars *vars);
-int		right_move(t_vars *vars);
-int		direct_moves(int keycode, t_vars *vars);
+int		up_move(t_data *data);
+int		down_move(t_data *data);
+int		left_move(t_data *data);
+int		right_move(t_data *data);
+int		direct_moves(int keycode, t_data *data);
 void	def_img(t_data *data);
 void	background(t_data *data);
 int		map_size(t_data *data);
 int		read_map(int x, int y, t_data *data);
 int		map_wall(int y_size, t_data *data);
 int		pe_check(int y_size, int c, t_data *data);
-void	col_loc(int count, int y_size, t_data *data);
 int		chr_check(t_data *data, int y_size);
-void	col_loc(int count, int y_size, t_data *data);
-void	pl_loc(int y_size, t_data *data);
+void	ple_loc(int y_size, t_data *data);
+void	up_layer(t_data *data);
+void	gen_img(t_data *data);
 
 #endif

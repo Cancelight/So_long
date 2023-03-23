@@ -6,7 +6,7 @@
 /*   By: bkiziler <bkiziler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 18:33:50 by bkiziler          #+#    #+#             */
-/*   Updated: 2023/03/21 18:13:43 by bkiziler         ###   ########.fr       */
+/*   Updated: 2023/03/23 14:44:34 by bkiziler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,14 @@ int	map_size(t_data *data)
 	{
 		y++;
 		x = ft_strlen(str);
-		if(x != x1)
-			return(-1);
+		if (x != x1)
+			return (-1);
 		str = get_next_line(fd);
 	}
 	free(str);
 	if (x1 == 0 || y == 0)
-		return(-1);
-	return(read_map(x, y, data));
+		return (-1);
+	return (read_map(x, y, data));
 }
 
 int	read_map(int x, int y, t_data *data)
@@ -44,13 +44,15 @@ int	read_map(int x, int y, t_data *data)
 	int		fd;
 	int		i;
 
+	data -> y_max = y;
+	data -> x_max = x - 1;
 	i = 0;
 	a = 0;
-	data ->map = malloc(sizeof(char *) * y);
-	while(a < y)
+	data -> map = malloc(sizeof(char *) * y);
+	while (a < y)
 		data -> map[a++] = malloc(sizeof(char) * (x + 1));
 	fd = open("map.ber", O_RDWR, 0777);
-	while(i < y)
+	while (i < y)
 		data -> map[i++] = get_next_line(fd);
 	return (map_wall(y, data));
 }
@@ -62,7 +64,9 @@ int	map_wall(int y_size, t_data *data)
 
 	x = -1;
 	y = -1;
-	while (data -> map[0][++x] && data -> map[0][x] != '\n')
+	if (chr_check (data, y_size) == -1)
+		return (-1);
+	while (data -> map[0][x] != '\n')
 	{
 		if (data -> map[0][x] != '1' || data -> map[y_size -1][x] != 1)
 			return(-1);
@@ -72,9 +76,10 @@ int	map_wall(int y_size, t_data *data)
 		if (data -> map[y][0] != '1' || data -> map[y][x - 2] != '1')
 			return(-1);
 	}
-	if (chr_check(data, y_size) == -1 || pe_check(y_size, 'P', data) == -1 || \
-	pe_check(y_size, 'E', data) == -1 || pe_check(y_size, 'P', data) == -1)
+	if (pe_check(y_size, 'P', data) == -1 || pe_check(y_size, 'E', data) == -1 \
+		|| pe_check(y_size, 'C', data) == -1)
 		return (-1);
+	pl_loc(y_size, data);
 	return (0);
 }
 
@@ -91,7 +96,7 @@ int	pe_check(int y_size, int c, t_data *data)
 	{
 		while (data -> map[y][++x] && count <= 1)
 		{
-			if (data -> map[y][x] =='E')
+			if (data -> map[y][x] == c)
 			{
 				if (data -> map[y][x-1] == '1' && data -> map[y][x+1] == '1' && \
 					data -> map[y-1][x] == '1' && data -> map[y+1][x] =='1')
@@ -103,6 +108,6 @@ int	pe_check(int y_size, int c, t_data *data)
 	if ((c == 'E' || c == 'P') && count != 1)
 		return(-1);
 	else if (c == 'C')
-		col_loc(count, y_size, data);
+		data -> collect = count;
 	return(0);
 }
