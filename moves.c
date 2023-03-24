@@ -6,7 +6,7 @@
 /*   By: bkiziler <bkiziler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 20:46:36 by bkiziler          #+#    #+#             */
-/*   Updated: 2023/03/23 16:41:29 by bkiziler         ###   ########.fr       */
+/*   Updated: 2023/03/24 14:33:19 by bkiziler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,123 +14,62 @@
 
 int direct_moves(int keycode, t_data *data)
 {
+	int	x;
+	int	y;
+
+	y = data -> p_loc[0];
+	x = data -> p_loc[1];
 	if (keycode == W || keycode == UP)
-		step_count(up_move(data));
+		step_count(move_check(data, y - 1, x));
 	else if (keycode == S || keycode == DOWN)
-		step_count(down_move(data));
+		step_count(move_check(data, y + 1, x));
 	else if (keycode == D || keycode == RIGHT)
-		step_count(right_move(data));
+		step_count(move_check(data, y, x + 1));
 	else if (keycode == A || keycode == LEFT)
-		step_count(left_move(data));
+		step_count(move_check(data, y, x - 1));
 	else if (keycode == ESC)
-		mlx_destroy_window(data -> mlx, data -> win);
-	return (0);
-}
-
-int	up_move(t_data *data)
-{
-	int	x;
-	int	y;
-
-	x = data -> p_loc[1];
-	y = data -> p_loc[0];
-	if ((data -> map[y + 1][x] == '1') || (data -> map[y + 1][x] == 'E' && data -> collect != 0))
-		return (-1);
-	else if (data -> map[y + 1][x] == '0')
-	{
-		data -> map[y][x] = '0';
-		data -> map[y + 1][x] = 'P';
-		gen_img(data);
-	}
-	else if (data -> map[y + 1][x] == 'C')
-	{
-		data -> map[y][x] = '0';
-		data -> map[y + 1][x] = 'P';
-		data -> collect--;
-		gen_img(data);
-	}
-	else if (data -> map[y + 1][x] == 'E' && data -> collect == 0)
 		exit_game(data, 0);
 	return (0);
 }
 
-int	down_move(t_data *data)
+int	move_check(t_data *data, int y, int x)
 {
-	int	x;
-	int	y;
+	int	a;
+	int	b;
 
-	x = data -> p_loc[1];
-	y = data -> p_loc[0];
-	if ((data -> map[y - 1][x] == '1') || (data -> map[y + 1][x] == 'E' && data -> collect != 0))
+	a = data -> p_loc[0];
+	b = data -> p_loc[1];
+	if (data -> map[y][x] == '1')
 		return (-1);
-	else if (data -> map[y - 1][x] == '0')
+	else if (data -> map[y][x] == '0')
 	{
-		data -> map[y][x] = '0';
-		data -> map[y - 1][x] = 'P';
-		gen_img(data);
+		data -> map[a][b] = '0';
+		data -> map[y][x] = 'P';
 	}
-	else if (data -> map[y - 1][x] == 'C')
+	else if (data -> map[y][x] == 'C')
 	{
-		data -> map[y][x] = '0';
-		data -> map[y - 1][x] = 'P';
+		data -> map[a][b] = '0';
+		data -> map[y][x] = 'P';
 		data -> collect--;
-		gen_img(data);
 	}
-	else if (data -> map[y - 1][x] == 'E' && data -> collect == 0)
+	else if (data -> map[y][x] == 'E' && data->collect == 0)
 		exit_game(data, 0);
-	return (0);
+	exit_check(data, y ,x);
+	gen_img(data, x, y);
+	return (1);
 }
 
-int	right_move(t_data *data)
+void exit_check(t_data *data, int y, int x)
 {
-	int	x;
-	int	y;
+	int a;
+	int b;
 
-	x = data -> p_loc[1];
-	y = data -> p_loc[0];
-	if ((data -> map[y][x + 1] == '1') || (data -> map[y][x + 1] == 'E' && data -> collect != 0))
-		return (-1);
-	else if (data -> map[y][x + 1] == '0')
+	if (data -> map[y][x] == 'E')
 	{
-		data -> map[y][x] = '0';
-		data -> map[y][x + 1] = 'P';
-		gen_img(data);
+		a = data -> p_loc[0];
+		b = data -> p_loc[1];
+		data -> map[a][b] = '0';
 	}
-	else if (data -> map[y][x + 1] == 'C')
-	{
-		data -> map[y][x] = '0';
-		data -> map[y][x + 1] = 'P';
-		data -> collect--;
-		gen_img(data);
-	}
-	else if (data -> map[y][x + 1] == 'E' && data -> collect == 0)
-		exit_game(data, 0);
-	return (0);
-}
-
-int	left_move(t_data *data)
-{
-	int	x;
-	int	y;
-
-	x = data -> p_loc[1];
-	y = data -> p_loc[0];
-	if ((data -> map[y][x - 1] == '1') || (data -> map[y][x - 1] == 'E' && data -> collect != 0))
-		return (-1);
-	else if (data -> map[y][x - 1] == '0')
-	{
-		data -> map[y][x] = '0';
-		data -> map[y][x - 1] = 'P';
-		gen_img(data);
-	}
-	else if (data -> map[y][x - 1] == 'C')
-	{
-		data -> map[y][x] = '0';
-		data -> map[y][x - 1] = 'P';
-		data -> collect--;
-		gen_img(data);
-	}
-	else if (data -> map[y][x - 1] == 'E' && data -> collect == 0)
-		exit_game(data, 0);
-	return (0);
+	else
+		data->map[data->e_loc[0]][data->e_loc[1]] = 'E';
 }

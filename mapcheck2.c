@@ -6,7 +6,7 @@
 /*   By: bkiziler <bkiziler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 14:49:44 by bkiziler          #+#    #+#             */
-/*   Updated: 2023/03/23 17:35:35 by bkiziler         ###   ########.fr       */
+/*   Updated: 2023/03/24 14:09:13 by bkiziler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void	ple_loc(int y_size, t_data *data)
 	x = 0;
 	y = 0;
 	data -> p_loc = malloc(sizeof(int) * 2);
+	data -> e_loc = malloc(sizeof(int) * 2);
 	while (++y < y_size)
 	{
 		x = 0;
@@ -45,7 +46,11 @@ void	ple_loc(int y_size, t_data *data)
 			{
 				data -> p_loc[0] = y;
 				data -> p_loc[1] = x;
-				return;
+			}
+			else if (data->map[y][x] == 'E')
+			{
+				data -> e_loc[0] = y;
+				data -> e_loc[1] = x;
 			}
 		}
 	}
@@ -58,13 +63,15 @@ void	step_count(int ret)
 	if (ret == 1)
 	{
 		step++;
-		ft_printf("%d", step);
+		ft_printf("%d\n", step);
 	}
 }
 
-void	gen_img(t_data *data)
+void	gen_img(t_data *data, int x, int y)
 {
-	mlx_destroy_window(data -> mlx, data -> win);
+	data -> p_loc[1] = x;
+	data -> p_loc[0] = y;
+	mlx_clear_window(data -> mlx, data -> win);
 	background(data);
 	up_layer(data);
 }

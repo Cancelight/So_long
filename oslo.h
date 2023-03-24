@@ -6,7 +6,7 @@
 /*   By: bkiziler <bkiziler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 18:01:24 by bkiziler          #+#    #+#             */
-/*   Updated: 2023/03/23 16:50:52 by bkiziler         ###   ########.fr       */
+/*   Updated: 2023/03/24 13:46:17 by bkiziler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,13 @@ typedef struct	s_data {
 	void		*floor_img;
 	void		*hero_img;
 	void		*collect_img;
+	void		*exit_img;
 	char		*addr;
 	int			bits_per_pixel;
 	int			line_length;
 	int			endian;
 	int			*p_loc;
+	int			*e_loc;
 	void		*mlx;
 	void		*win;
 	char 		**map;
@@ -49,10 +51,7 @@ typedef struct	s_data {
 	int			x_max;
 }				t_data;
 
-int		up_move(t_data *data);
-int		down_move(t_data *data);
-int		left_move(t_data *data);
-int		right_move(t_data *data);
+int		move_check(t_data *data, int y, int x);
 int		direct_moves(int keycode, t_data *data);
 void	def_img(t_data *data);
 void	background(t_data *data);
@@ -63,10 +62,11 @@ int		pe_check(int y_size, int c, t_data *data);
 int		chr_check(t_data *data, int y_size);
 void	ple_loc(int y_size, t_data *data);
 void	up_layer(t_data *data);
-void	gen_img(t_data *data);
+void	gen_img(t_data *data, int x, int y);
 void	exit_game(t_data *data, int ret);
 char	*ft_strtrim(char *s1, char *set);
 void	step_count(int ret);
-int	ft_strlcpy(char *dst, char *src, int dstsize);
+int		ft_strlcpy(char *dst, char *src, int dstsize);
+void	exit_check(t_data *data, int y, int x);
 
 #endif

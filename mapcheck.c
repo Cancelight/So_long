@@ -6,7 +6,7 @@
 /*   By: bkiziler <bkiziler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 18:33:50 by bkiziler          #+#    #+#             */
-/*   Updated: 2023/03/23 17:38:53 by bkiziler         ###   ########.fr       */
+/*   Updated: 2023/03/24 12:32:29 by bkiziler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,8 @@ int	pe_check(int y_size, int c, t_data *data)
 	count = 0;
 	while (++y < y_size)
 	{
-		while (data -> map[y][++x] && count <= 1)
+		x = 0;
+		while (data -> map[y][++x])
 		{
 			if (data -> map[y][x] == c)
 			{
