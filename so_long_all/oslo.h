@@ -6,7 +6,7 @@
 /*   By: bkiziler <bkiziler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 18:01:24 by bkiziler          #+#    #+#             */
-/*   Updated: 2023/03/29 17:06:09 by bkiziler         ###   ########.fr       */
+/*   Updated: 2023/03/30 12:43:24 by bkiziler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,5 +68,6 @@ int		ft_strlcpy(char *dst, char *src, int dstsize);
 void	exit_check(t_data *data, int y, int x);
 int		valid_path(t_data *data, int y, int x);
 void	checkc(t_data *data, int y, int x);
+void	trans_map(t_data *data, int i, int y);
 
 #endif

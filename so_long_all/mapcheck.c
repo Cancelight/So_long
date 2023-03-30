@@ -6,7 +6,7 @@
 /*   By: bkiziler <bkiziler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 18:33:50 by bkiziler          #+#    #+#             */
-/*   Updated: 2023/03/29 17:55:25 by bkiziler         ###   ########.fr       */
+/*   Updated: 2023/03/30 12:41:50 by bkiziler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,11 @@ int	map_size(t_data *data)
 		x = ft_strlen(str);
 		if (x != x1)
 			return (-1);
+		free(str);
 		str = get_next_line(fd);
 	}
-	close(fd);
 	free(str);
+	close(fd);
 	if (x1 == 0 || y == 0)
 		return (-1);
 	return (read_map(x, y, data));
@@ -42,7 +43,6 @@ int	map_size(t_data *data)
 int	read_map(int x, int y, t_data *data)
 {
 	int		a;
-	int		fd;
 	int		i;
 
 	data -> y_max = y;
@@ -56,10 +56,7 @@ int	read_map(int x, int y, t_data *data)
 		data -> map[a] = malloc(sizeof(char) * (x + 1));
 		data -> temp[a++] = malloc(sizeof(char) * (x + 1));
 	}
-	fd = open("map.ber", O_RDWR, 0777);
-	while (i < y)
-		data -> map[i++] = get_next_line(fd);
-	close(fd);
+	trans_map(data, i, y);
 	i = -1;
 	while (++i < data -> y_max)
 		ft_strlcpy(data -> temp[i], data -> map[i], data -> x_max);

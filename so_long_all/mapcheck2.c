@@ -6,7 +6,7 @@
 /*   By: bkiziler <bkiziler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 14:49:44 by bkiziler          #+#    #+#             */
-/*   Updated: 2023/03/24 16:29:04 by bkiziler         ###   ########.fr       */
+/*   Updated: 2023/03/30 12:04:45 by bkiziler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ int	chr_check(t_data *data, int y_size)
 		a = ft_strtrim(data -> map[y], "CP01E");
 		if (!(a[0] == '\n' && a[1] == '\0'))
 			return (-1);
+		free(a);
 	}
-	free(a);
 	return (0);
 }
 

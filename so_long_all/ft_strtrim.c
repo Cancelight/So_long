@@ -6,7 +6,7 @@
 /*   By: bkiziler <bkiziler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 16:36:34 by bkiziler          #+#    #+#             */
-/*   Updated: 2023/03/29 17:54:10 by bkiziler         ###   ########.fr       */
+/*   Updated: 2023/03/30 12:43:06 by bkiziler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,4 +61,24 @@ int	ft_strlcpy(char *dst, char *src, int dstsize)
 	}
 	dst[i] = '\0';
 	return (s1);
+}
+
+void	trans_map(t_data *data, int i, int y)
+{
+	int		fd;
+	int		k;
+	char	*str;
+
+	fd = open("map.ber", O_RDWR, 0777);
+	while (i < y)
+	{
+		k = -1;
+		str = get_next_line(fd);
+		while (str[++k])
+			data->map[i][k] = str[k];
+		if (str)
+			free(str);
+		i++;
+	}
+	close(fd);
 }
