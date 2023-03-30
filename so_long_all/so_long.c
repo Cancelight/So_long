@@ -6,7 +6,7 @@
 /*   By: bkiziler <bkiziler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 20:46:32 by bkiziler          #+#    #+#             */
-/*   Updated: 2023/03/30 12:44:47 by bkiziler         ###   ########.fr       */
+/*   Updated: 2023/03/30 15:12:38 by bkiziler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int	main(void)
 		exit(1);
 	}
 	data.mlx = mlx_init();
-	data.win = mlx_new_window(data.mlx, (data.x_max) * 64, \
+	data.win = mlx_new_window(data.mlx, (data.x_max - 1) * 64, \
 	data.y_max * 64, "Project");
 	def_img(&data);
 	background(&data);

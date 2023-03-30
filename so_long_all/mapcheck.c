@@ -6,7 +6,7 @@
 /*   By: bkiziler <bkiziler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 18:33:50 by bkiziler          #+#    #+#             */
-/*   Updated: 2023/03/30 13:55:16 by bkiziler         ###   ########.fr       */
+/*   Updated: 2023/03/30 15:12:33 by bkiziler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	read_map(int x, int y, t_data *data)
 	int		i;
 
 	data -> y_max = y;
-	data -> x_max = x - 1;
+	data -> x_max = x;
 	a = 0;
 	data -> map = malloc(sizeof(char *) * y);
 	data -> temp = malloc(sizeof(char *) * y);
@@ -58,7 +58,7 @@ int	read_map(int x, int y, t_data *data)
 	trans_map(data, 0, y);
 	i = -1;
 	while (++i < data -> y_max)
-		ft_strlcpy(data -> temp[i], data -> map[i], data -> x_max);
+		ft_strlcpy(data -> temp[i], data -> map[i], data -> x_max + 1);
 	return (map_wall(y, data));
 }
 

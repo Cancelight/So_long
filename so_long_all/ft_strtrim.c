@@ -6,7 +6,7 @@
 /*   By: bkiziler <bkiziler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 16:36:34 by bkiziler          #+#    #+#             */
-/*   Updated: 2023/03/30 12:43:06 by bkiziler         ###   ########.fr       */
+/*   Updated: 2023/03/30 14:42:54 by bkiziler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ void	trans_map(t_data *data, int i, int y)
 		str = get_next_line(fd);
 		while (str[++k])
 			data->map[i][k] = str[k];
+		data->map[i][k] = '\0';
 		if (str)
 			free(str);
 		i++;
