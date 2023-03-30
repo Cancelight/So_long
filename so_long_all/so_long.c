@@ -6,7 +6,7 @@
 /*   By: bkiziler <bkiziler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 20:46:32 by bkiziler          #+#    #+#             */
-/*   Updated: 2023/03/24 16:36:11 by bkiziler         ###   ########.fr       */
+/*   Updated: 2023/03/30 11:53:39 by bkiziler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,5 +87,6 @@ int	main(void)
 	background(&data);
 	up_layer(&data);
 	mlx_key_hook(data.win, direct_moves, &data);
+	
 	mlx_loop(data.mlx);
 }

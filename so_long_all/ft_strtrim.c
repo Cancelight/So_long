@@ -6,7 +6,7 @@
 /*   By: bkiziler <bkiziler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 16:36:34 by bkiziler          #+#    #+#             */
-/*   Updated: 2023/03/23 16:50:37 by bkiziler         ###   ########.fr       */
+/*   Updated: 2023/03/29 17:54:10 by bkiziler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	check(char c, char const *ptr)
 char	*ft_strtrim(char *s1, char *set)
 {
 	char	*ptr;
-	int	n;
+	int		n;
 
 	if (s1 == NULL || set == NULL)
 		return (NULL);
@@ -48,7 +48,7 @@ char	*ft_strtrim(char *s1, char *set)
 int	ft_strlcpy(char *dst, char *src, int dstsize)
 {
 	int		s1;
-	int	i;
+	int		i;
 
 	i = 0;
 	s1 = ft_strlen(src);

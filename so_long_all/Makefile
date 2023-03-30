@@ -6,7 +6,7 @@
 #    By: bkiziler <bkiziler@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/23 15:53:54 by bkiziler          #+#    #+#              #
-#    Updated: 2023/03/24 16:42:17 by bkiziler         ###   ########.fr        #
+#    Updated: 2023/03/29 16:48:59 by bkiziler         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,8 @@ SRC = mapcheck.c \
 		mapcheck2.c \
 		moves.c \
 		so_long.c \
-		ft_strtrim.c
+		ft_strtrim.c \
+		validPath.c 
 
 NAME = so_long
 CC = gcc

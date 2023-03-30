@@ -6,7 +6,7 @@
 /*   By: bkiziler <bkiziler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 18:01:24 by bkiziler          #+#    #+#             */
-/*   Updated: 2023/03/24 16:50:12 by bkiziler         ###   ########.fr       */
+/*   Updated: 2023/03/29 17:06:09 by bkiziler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,9 @@ typedef struct s_data {
 	void		*mlx;
 	void		*win;
 	char		**map;
+	char		**temp;
 	int			collect;
+	int			count;
 	int			y_max;
 	int			x_max;
 }				t_data;
@@ -64,5 +66,7 @@ char	*ft_strtrim(char *s1, char *set);
 void	step_count(int ret);
 int		ft_strlcpy(char *dst, char *src, int dstsize);
 void	exit_check(t_data *data, int y, int x);
+int		valid_path(t_data *data, int y, int x);
+void	checkc(t_data *data, int y, int x);
 
 #endif

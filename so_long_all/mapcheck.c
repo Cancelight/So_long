@@ -6,7 +6,7 @@
 /*   By: bkiziler <bkiziler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 18:33:50 by bkiziler          #+#    #+#             */
-/*   Updated: 2023/03/24 16:25:54 by bkiziler         ###   ########.fr       */
+/*   Updated: 2023/03/29 17:55:25 by bkiziler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,19 @@ int	read_map(int x, int y, t_data *data)
 	i = 0;
 	a = 0;
 	data -> map = malloc(sizeof(char *) * y);
+	data -> temp = malloc(sizeof(char *) * y);
 	while (a < y)
-		data -> map[a++] = malloc(sizeof(char) * (x + 1));
+	{
+		data -> map[a] = malloc(sizeof(char) * (x + 1));
+		data -> temp[a++] = malloc(sizeof(char) * (x + 1));
+	}
 	fd = open("map.ber", O_RDWR, 0777);
 	while (i < y)
 		data -> map[i++] = get_next_line(fd);
 	close(fd);
+	i = -1;
+	while (++i < data -> y_max)
+		ft_strlcpy(data -> temp[i], data -> map[i], data -> x_max);
 	return (map_wall(y, data));
 }
 
@@ -82,6 +89,8 @@ int	map_wall(int y_size, t_data *data)
 		|| pe_check(y_size, 'C', data, 0))
 		return (-1);
 	ple_loc(y_size, data);
+	if (valid_path(data, data->p_loc[0], data->p_loc[1]) == 0)
+		return (-1);
 	return (0);
 }
 
@@ -98,17 +107,13 @@ int	pe_check(int y_size, int c, t_data *data, int count)
 		while (data -> map[y][++x])
 		{
 			if (data -> map[y][x] == c)
-			{
-				if (data->map[y][x - 1] == '1' && data->map[y][x + 1] == '1' \
-				&& data->map[y - 1][x] == '1' && data->map[y + 1][x] == '1')
-					return (-1);
 				count++;
-			}
 		}
 	}
 	if ((c == 'E' || c == 'P') && count != 1)
 		return (-1);
 	else if (c == 'C')
 		data -> collect = count;
+	data->count = 0;
 	return (0);
 }
