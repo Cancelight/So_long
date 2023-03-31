@@ -6,7 +6,7 @@
 /*   By: bkiziler <bkiziler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 14:49:44 by bkiziler          #+#    #+#             */
-/*   Updated: 2023/03/30 14:57:13 by bkiziler         ###   ########.fr       */
+/*   Updated: 2023/03/31 15:37:24 by bkiziler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,9 @@ void	gen_img(t_data *data, int x, int y)
 	up_layer(data);
 }
 
-void	exit_game(t_data *data, int ret)
+int	exit_game(t_data *data)
 {
 	mlx_destroy_window(data -> mlx, data -> win);
-	exit(ret);
+	exit(0);
+	return (0);
 }

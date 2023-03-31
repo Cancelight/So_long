@@ -6,7 +6,7 @@
 /*   By: bkiziler <bkiziler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 16:36:34 by bkiziler          #+#    #+#             */
-/*   Updated: 2023/03/30 14:42:54 by bkiziler         ###   ########.fr       */
+/*   Updated: 2023/03/31 14:41:31 by bkiziler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	trans_map(t_data *data, int i, int y)
 	int		k;
 	char	*str;
 
-	fd = open("map.ber", O_RDWR, 0777);
+	fd = open(data->fname, O_RDWR, 0777);
 	while (i < y)
 	{
 		k = -1;

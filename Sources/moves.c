@@ -6,7 +6,7 @@
 /*   By: bkiziler <bkiziler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 20:46:36 by bkiziler          #+#    #+#             */
-/*   Updated: 2023/03/30 15:10:36 by bkiziler         ###   ########.fr       */
+/*   Updated: 2023/03/30 18:01:00 by bkiziler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	direct_moves(int keycode, t_data *data)
 	else if (keycode == A || keycode == LEFT)
 		step_count(move_check(data, y, x - 1));
 	else if (keycode == ESC)
-		exit_game(data, 0);
+		exit_game(data);
 	return (0);
 }
 
@@ -53,7 +53,7 @@ int	move_check(t_data *data, int y, int x)
 		data -> collect--;
 	}
 	else if (data -> map[y][x] == 'E' && data->collect == 0)
-		exit_game(data, 0);
+		exit_game(data);
 	exit_check(data, y, x);
 	gen_img(data, x, y);
 	return (1);

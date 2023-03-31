@@ -6,7 +6,7 @@
 /*   By: bkiziler <bkiziler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 20:46:32 by bkiziler          #+#    #+#             */
-/*   Updated: 2023/03/30 15:12:38 by bkiziler         ###   ########.fr       */
+/*   Updated: 2023/03/31 15:31:11 by bkiziler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,11 @@ void	def_img(t_data *data)
 
 	x = 64;
 	y = 64;
-	data->wall_img = mlx_xpm_file_to_image(data->mlx, "./xg/sol.xpm", &x, &y);
-	data->floor_img = mlx_xpm_file_to_image(data->mlx, "./xg/fl.xpm", &x, &y);
-	data->hero_img = mlx_xpm_file_to_image(data->mlx, "./xg/st.xpm", &x, &y);
-	data->collect_img = mlx_xpm_file_to_image(data->mlx, "./xg/pn.xpm", &x, &y);
-	data->exit_img = mlx_xpm_file_to_image(data->mlx, "./xg/sky.xpm", &x, &y);
+	data->wall_img = mlx_xpm_file_to_image(data->mlx, SOLXPM, &x, &y);
+	data->floor_img = mlx_xpm_file_to_image(data->mlx, FLXPM, &x, &y);
+	data->hero_img = mlx_xpm_file_to_image(data->mlx, HRXPM, &x, &y);
+	data->collect_img = mlx_xpm_file_to_image(data->mlx, PNXPM, &x, &y);
+	data->exit_img = mlx_xpm_file_to_image(data->mlx, SKYXPM, &x, &y);
 }
 
 void	background(t_data *data)
@@ -71,21 +71,29 @@ void	up_layer(t_data *data)
 	}
 }
 
-int	main(void)
+int	main(int ac, char **av)
 {
 	t_data	data;
 
+	if (ac != 2)
+	{
+		perror("Invalid argument count");
+		exit(0);
+	}
+	name_check(&data, av[1]);
 	if (map_size(&data) == -1)
 	{
+		system("leaks so_long");
 		perror("Invalid map\n");
-		exit(1);
+		exit(0);
 	}
 	data.mlx = mlx_init();
 	data.win = mlx_new_window(data.mlx, (data.x_max - 1) * 64, \
-	data.y_max * 64, "Project");
+	data.y_max * 64, "so_long");
 	def_img(&data);
 	background(&data);
 	up_layer(&data);
-	mlx_key_hook(data.win, direct_moves, &data);
+	mlx_hook(data.win, 17, 0, exit_game, &data);
+	mlx_hook(data.win, 2, 1L << 0, direct_moves, &data);
 	mlx_loop(data.mlx);
 }
